@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import Class from '../models/Class.js';
-
+import ClassAccess from '../models/ClassAccess.js';
 
 const classRouter = new Router();
 classRouter.post('/', async (req,res,next) => {
@@ -55,6 +55,20 @@ classRouter.delete('/:id', async (req,res,next) => {
             });
         } else{
             res.json({message: `Error deleting class: ${id}`});
+        }
+    } catch(error){
+        next(error);
+    }
+});
+
+classRouter.post('/access', async(req,res,next) => {
+    try{
+        const {body} = req;
+        const newAccess = await ClassAccess.create(body);
+        if(newAccess){
+            res.status(201).json({access: newAccess});
+        } else{
+            res.status(400).json({message: "Error granting access"});
         }
     } catch(error){
         next(error);

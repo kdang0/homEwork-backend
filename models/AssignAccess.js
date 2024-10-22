@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import Student from "./Student";
-import Assignment from "./Assignment";
+import Student from "./Student.js";
+import Assignment from "./Assignment.js";
 
 const assignAccessSchema = new mongoose.Schema({
     studentId : {

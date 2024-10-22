@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 export const submissionSchema = new mongoose.Schema({
     submittedDate: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     },
     answers: {
         type: [{

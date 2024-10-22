@@ -1,6 +1,7 @@
 import  { Router } from 'express';
 import Assignment from '../models/Assignment.js';
 import Submission from '../models/Submission.js';
+import AssignAccess from '../models/AssignAccess.js';
 
 const assignmentRouter = new Router();
 
@@ -79,6 +80,20 @@ assignmentRouter.patch('/submission/:id', async(req,res,next) => {
             res.status(201).json({assignment});
         } else{
             res.status(400).json({message: "Error creating submission"});
+        }
+    } catch(error){
+        next(error);
+    }
+});
+
+assignmentRouter.post('/access', async(req,res,next) => {
+    try{
+        const {body} = req;
+        const newAccess = await AssignAccess.create(body);
+        if(newAccess){
+            res.status(201).json({access: newAccess});
+        } else{
+            res.status(400).json({message: "Error granting access"});
         }
     } catch(error){
         next(error);

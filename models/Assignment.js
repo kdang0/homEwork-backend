@@ -8,13 +8,9 @@ const assignmentSchema = new mongoose.Schema({
     ref: Tutor,
     required: true
   },
-  question: {
+  questions: {
     type: [
       {
-        id:{
-            type: mongoose.ObjectId,
-            default: new mongoose.Types.ObjectId()
-        },
         problem: {
           type: String,
           required: true,
@@ -52,6 +48,10 @@ const assignmentSchema = new mongoose.Schema({
   totalPoints: {
     type: Number,
     required: true
+  },
+  createdAt:{
+    type:Date,
+    index: {expires: '730d'}
   }
 });
 
